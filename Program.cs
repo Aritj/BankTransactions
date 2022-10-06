@@ -6,6 +6,11 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 
+/**
+ * There are two DB connection strings defined:
+ * 1.   "Windows"
+ * 2.   "Mac"
+ */
 builder.Services.AddDbContext<TransactionDbContext>(options =>
 {
     options.UseSqlServer(builder.Configuration.GetConnectionString("Windows"));
