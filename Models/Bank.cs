@@ -12,14 +12,13 @@ namespace BankTransactions.Models
 
 
         [Column(TypeName = "nvarchar(100)")]
-        [DisplayName("Beneficiary name")]
+        [DisplayName("Bank name")]
         [Required(ErrorMessage = "This field is required.")]
         [MaxLength(100, ErrorMessage = "Maximum 100 characters only.")]
         public string BankName { get; set; }
 
-        [Column(TypeName = "decimal(5, 2)")]
-        [DisplayName("transaction rate")]
+        [DisplayName("Transaction rate")]
         [Required(ErrorMessage = "This field is required.")]
-        public decimal TransactionRate { get; set; }
+        public int TransactionRate { get; set; }
     }
 }

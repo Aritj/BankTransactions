@@ -1,4 +1,4 @@
-﻿@model IEnumerable<BankTransactions.Models.Transaction>
+﻿@model IEnumerable<BankTransactions.Models.Bank>
 
 @{
     ViewData["Title"] = "Index";
@@ -11,10 +11,7 @@
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.Date)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Amount)
+                @Html.DisplayNameFor(model => model.BankName)
             </th>
             <th>
                 <a asp-action="AddOrEdit" class="btn btn-sm btn-success">
@@ -27,19 +24,16 @@
 @foreach (var item in Model) {
         <tr>
             <td>
-                @Html.DisplayFor(modelItem => item.Date)
+                @Html.DisplayFor(modelItem => item.BankName)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Amount)
-            </td>
-            <td>
-                <a asp-action="AddOrEdit" asp-route-id="@item.TransactionId" class="btn">
+                <a asp-action="AddOrEdit" asp-route-id="@item.BankId" class="btn">
                     <i class="fa-solid fa-pen-to-square"></i>
                 </a>
-                <a asp-action="Details" asp-route-id="@item.TransactionId" class="btn">
+                <a asp-action="Details" asp-route-id="@item.BankId" class="btn">
                     <i class="fa-solid fa-circle-info"></i>
                 </a>
-                <form asp-action="Delete" asp-route-id="@item.TransactionId" style="display: inline;">
+                <form asp-action="Delete" asp-route-id="@item.BankId" style="display: inline;">
                     <button type="submit" class="btn" >
                             <i class="fa-sharp fa-solid fa-trash"></i>
                     </button>

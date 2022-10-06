@@ -17,6 +17,7 @@ namespace BankTransactions.Models
         public string CustomerName { get; set; }
 
         [DisplayFormat(DataFormatString = "{0:dd-MMM-yy}")]
+        [Required]
         public DateTime Birthday { get; set; }
     }
 }

@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace BankTransactions.Migrations
 {
     [DbContext(typeof(TransactionDbContext))]
-    [Migration("20221006114153_initial create")]
+    [Migration("20221006133457_initial create")]
     partial class initialcreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -36,6 +36,9 @@ namespace BankTransactions.Migrations
                         .IsRequired()
                         .HasMaxLength(100)
                         .HasColumnType("nvarchar(100)");
+
+                    b.Property<int>("TransactionRate")
+                        .HasColumnType("int");
 
                     b.HasKey("BankId");
 

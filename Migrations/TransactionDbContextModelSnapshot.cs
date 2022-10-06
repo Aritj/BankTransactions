@@ -35,6 +35,9 @@ namespace BankTransactions.Migrations
                         .HasMaxLength(100)
                         .HasColumnType("nvarchar(100)");
 
+                    b.Property<int>("TransactionRate")
+                        .HasColumnType("int");
+
                     b.HasKey("BankId");
 
                     b.ToTable("Banks");
