@@ -10,10 +10,10 @@ namespace BankTransactions.Models
 
         [ForeignKey("BankForeignKey")]
         [Required]
-        public Bank Bank { get; set; }
+        public int BankId { get; set; }
 
         [ForeignKey("CustomerForeignKey")]
         [Required]
-        public Customer Customer { get; set; }
+        public int CustomerId { get; set; }
     }
 }

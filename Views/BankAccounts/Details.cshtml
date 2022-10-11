@@ -1,0 +1,43 @@
+﻿@model BankTransactions.Models.BankAccount
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<div>
+    <h4>BankAccount</h4>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.BankAccountId)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.BankAccountId)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.CustomerId)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.CustomerId)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.BankId)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.BankId)
+        </dd>
+    </dl>
+</div>
+
+<div class="row mt-2">
+    <div class="col-md-6">
+        <div class="form-group">
+            <a asp-action="AddOrEdit" asp-route-id="@Model?.CustomerId" class="btn btn-secondary w-100">Edit</a>
+        </div>
+    </div>
+    <div class="col-md-6">
+        <div>
+            <a asp-action="Index" class="btn btn-secondary w-100">Back</a>
+        </div>
+    </div>
+</div>

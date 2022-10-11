@@ -1,0 +1,47 @@
+﻿@model BankTransactions.Models.BankAccountAddOrEditViewModel
+
+@{
+    ViewData["Title"] = "BankAccounts";
+}
+
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="AddOrEdit">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="BankAccount.BankAccountId" />
+
+            <div class="form-group">
+                <label asp-for="Customer" class="control-label"></label>
+                <select asp-for="Customer.CustomerId" asp-items="@new SelectList(Model.CustomerList, nameof(Customer.CustomerId), nameof(Customer.CustomerName))" class="form-control">
+                    <option disabled selected>--- SELECT ---</option>
+                </select>
+                <span asp-validation-for="Customer" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Bank" class="control-label"></label>
+                <select asp-for="Bank.BankId" asp-items="@new SelectList(Model.BankList, nameof(Bank.BankId), nameof(Bank.BankName))" class="form-control" >
+                    <option disabled selected>--- SELECT ---</option>
+                </select>
+                <span asp-validation-for="Bank" class="text-danger"></span>
+            </div>
+            <div class="row mt-2">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <input type="submit" value="Submit" class="btn btn-primary w-100" />
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div>
+                        <a asp-action="Index" class="btn btn-secondary w-100">View all</a>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

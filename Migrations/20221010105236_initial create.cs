@@ -10,6 +10,20 @@ namespace BankTransactions.Migrations
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
+                name: "BankAccounts",
+                columns: table => new
+                {
+                    BankAccountId = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    BankId = table.Column<int>(type: "int", nullable: false),
+                    CustomerId = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_BankAccounts", x => x.BankAccountId);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Banks",
                 columns: table => new
                 {
@@ -52,42 +66,6 @@ namespace BankTransactions.Migrations
                 {
                     table.PrimaryKey("PK_Transactions", x => x.TransactionId);
                 });
-
-            migrationBuilder.CreateTable(
-                name: "BankAccounts",
-                columns: table => new
-                {
-                    BankAccountId = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    BankForeignKey = table.Column<int>(type: "int", nullable: false),
-                    CustomerForeignKey = table.Column<int>(type: "int", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_BankAccounts", x => x.BankAccountId);
-                    table.ForeignKey(
-                        name: "FK_BankAccounts_Banks_BankForeignKey",
-                        column: x => x.BankForeignKey,
-                        principalTable: "Banks",
-                        principalColumn: "BankId",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_BankAccounts_Customers_CustomerForeignKey",
-                        column: x => x.CustomerForeignKey,
-                        principalTable: "Customers",
-                        principalColumn: "CustomerId",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateIndex(
-                name: "IX_BankAccounts_BankForeignKey",
-                table: "BankAccounts",
-                column: "BankForeignKey");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_BankAccounts_CustomerForeignKey",
-                table: "BankAccounts",
-                column: "CustomerForeignKey");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
@@ -96,13 +74,13 @@ namespace BankTransactions.Migrations
                 name: "BankAccounts");
 
             migrationBuilder.DropTable(
-                name: "Transactions");
-
-            migrationBuilder.DropTable(
                 name: "Banks");
 
             migrationBuilder.DropTable(
                 name: "Customers");
+
+            migrationBuilder.DropTable(
+                name: "Transactions");
         }
     }
 }

@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using BankTransactions.Models;
+using BankTransactions.Extensions;
 
 namespace BankTransactions.Controllers
 {
@@ -25,6 +26,8 @@ namespace BankTransactions.Controllers
 
         public async Task<IActionResult> Details(int? id)
         {
+            ViewBag.BankAccounts = _context.BankAccounts.Where(s => s.CustomerId == id).ToList();
+
             return View(await _context.Customers.FirstOrDefaultAsync(m => m.CustomerId == id));
         }
 
@@ -37,11 +40,13 @@ namespace BankTransactions.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> AddOrEdit([Bind("CustomerId,CustomerName,Birthday")] Customer customer)
         {
-            if (!ModelState.IsValid)
+            if (! ModelState.IsValid)
             {
                 return View(customer);
 
             }
+
+            customer.CustomerName = customer.CustomerName.Capitalize();
 
             if (customer.CustomerId == 0)
             {

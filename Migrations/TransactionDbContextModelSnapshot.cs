@@ -51,17 +51,13 @@ namespace BankTransactions.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("BankAccountId"), 1L, 1);
 
-                    b.Property<int>("BankForeignKey")
+                    b.Property<int>("BankId")
                         .HasColumnType("int");
 
-                    b.Property<int>("CustomerForeignKey")
+                    b.Property<int>("CustomerId")
                         .HasColumnType("int");
 
                     b.HasKey("BankAccountId");
-
-                    b.HasIndex("BankForeignKey");
-
-                    b.HasIndex("CustomerForeignKey");
 
                     b.ToTable("BankAccounts");
                 });
@@ -114,25 +110,6 @@ namespace BankTransactions.Migrations
                     b.HasKey("TransactionId");
 
                     b.ToTable("Transactions");
-                });
-
-            modelBuilder.Entity("BankTransactions.Models.BankAccount", b =>
-                {
-                    b.HasOne("BankTransactions.Models.Bank", "Bank")
-                        .WithMany()
-                        .HasForeignKey("BankForeignKey")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("BankTransactions.Models.Customer", "Customer")
-                        .WithMany()
-                        .HasForeignKey("CustomerForeignKey")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Bank");
-
-                    b.Navigation("Customer");
                 });
 #pragma warning restore 612, 618
         }
