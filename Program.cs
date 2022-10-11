@@ -33,4 +33,8 @@ app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Home}/{action=Index}/{id?}");
 
+
+// Seed Data if DB is empty.
+SeedData.EnsurePopulated(app);
+
 app.Run();

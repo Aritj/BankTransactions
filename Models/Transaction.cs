@@ -10,30 +10,19 @@ namespace BankTransactions.Models
         [Key]
         public int TransactionId { get; set; }
 
+        [ForeignKey("BankAccountForeignKey")]
         [Column(TypeName = "nvarchar(12)")]
         [DisplayName("Account number")]
         [Required(ErrorMessage ="This field is required.")]
         [MaxLength(12, ErrorMessage ="Maximum 12 characters only.")]
-        public string AccountNumber { get; set; }
+        public string FromAccountNumber { get; set; }
 
-        [Column(TypeName = "nvarchar(100)")]
-        [DisplayName("Beneficiary name")]
+        [ForeignKey("BankAccountForeignKey")]
+        [Column(TypeName = "nvarchar(12)")]
+        [DisplayName("Account number")]
         [Required(ErrorMessage = "This field is required.")]
-        [MaxLength(100, ErrorMessage = "Maximum 100 characters only.")]
-        public string BeneficiaryName { get; set; }
-
-        [Column(TypeName = "nvarchar(100)")]
-        [DisplayName("Bank number")]
-        [Required(ErrorMessage = "This field is required.")]
-        [MaxLength(100, ErrorMessage = "Maximum 100 characters only.")]
-        public string BankName { get; set; }
-
-        [Column(TypeName = "nvarchar(11)")]
-        [DisplayName("SWIFT code")]
-        [Required(ErrorMessage = "This field is required.")]
-        [MaxLength(11, ErrorMessage = "Maximum 11 characters only.")]
-        public string SWIFTCode { get; set; }
-
+        [MaxLength(12, ErrorMessage = "Maximum 12 characters only.")]
+        public string ToAccountNumber { get; set; }
 
         [Required]
         public int Amount { get; set; }

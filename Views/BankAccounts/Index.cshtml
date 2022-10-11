@@ -1,0 +1,55 @@
+﻿@model IEnumerable<BankTransactions.Models.BankAccountIndexViewModel>
+
+@{
+    ViewData["Title"] = "BankAccounts";
+}
+
+<table class="table" id="customer-table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.BankAccount.BankAccountId)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Customer.CustomerName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Bank.BankName)
+            </th>
+            <th>
+                <a asp-action="AddOrEdit" class="btn btn-sm btn-success">
+                    <i class="fa-solid fa-plus"></i> New
+                </a>
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.BankAccount.BankAccountId)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Customer.CustomerName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Bank.BankName)
+                </td>
+                <td>
+                    <a asp-action="AddOrEdit" asp-route-id="@item.BankAccount.BankAccountId" class="btn">
+                        <i class="fa-solid fa-pen-to-square"></i>
+                    </a>
+                    <a asp-action="Details" asp-route-id="@item.BankAccount.BankAccountId" class="btn">
+                        <i class="fa-solid fa-circle-info"></i>
+                    </a>
+                    <form asp-action="Delete" asp-route-id="@item.BankAccount.BankAccountId" style="display: inline;">
+                        <button type="submit" class="btn">
+                            <i class="fa-sharp fa-solid fa-trash"></i>
+                        </button>
+                    </form>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
