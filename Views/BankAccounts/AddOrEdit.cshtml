@@ -24,6 +24,11 @@
                 </select>
                 <span asp-validation-for="Bank" class="text-danger"></span>
             </div>
+            <div class="form-group">
+                <label asp-for="BankAccount.Amount" class="control-label"></label>
+                <input asp-for="BankAccount.Amount" class="form-control" />
+                <span asp-validation-for="BankAccount" class="text-danger"></span>
+            </div>
             <div class="row mt-2">
                 <div class="col-md-6">
                     <div class="form-group">

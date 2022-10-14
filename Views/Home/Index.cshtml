@@ -1,7 +1,62 @@
-﻿@{
+﻿@model BankTransactions.Models.Transaction
+
+@{
     ViewData["Title"] = "Home Page";
 }
 
-<div class="text-center">
+<div class="text-center" id="cookies">
     <h1 class="display-4" id="homepage-text">Welcome to online banking!</h1>
 </div>
+
+<button class="btn btn-primary" value="Transaction" onclick=toggle_visibility("transaction")></button>
+
+<div class="row" id="transaction" style="visibility: hidden">
+    <div class="col-md-4">
+        <form asp-action="Transaction">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="TransactionId" />
+            <div class="form-group">
+                <label asp-for="FromAccountNumber" class="control-label"></label>
+                <input asp-for="FromAccountNumber" class="form-control" />
+                <span asp-validation-for="FromAccountNumber" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ToAccountNumber" class="control-label"></label>
+                <input asp-for="ToAccountNumber" class="form-control" />
+                <span asp-validation-for="ToAccountNumber" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Amount" class="control-label"></label>
+                <input asp-for="Amount" class="form-control" />
+                <span asp-validation-for="Amount" class="text-danger"></span>
+            </div>
+            <input type="hidden" asp-for="Date" value="@Model.Date" />
+            <div class="row mt-2">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <input type="submit" value="Submit" class="btn btn-success w-100" />
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}
+
+<script>
+    function toggle_visibility(id) {
+        var div = document.getElementById(id);
+        var currentVisibility = div.style.visibility;
+
+        if (currentVisibility == 'visible' || currentVisibility == '') {
+            div.style.visibility = 'hidden';
+        } else {
+            div.style.visibility = 'visible';
+        }
+    }
+</script>

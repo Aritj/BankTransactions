@@ -11,23 +11,22 @@ namespace BankTransactions.Models
         public int TransactionId { get; set; }
 
         [ForeignKey("BankAccountForeignKey")]
-        [Column(TypeName = "nvarchar(12)")]
         [DisplayName("Account number")]
         [Required(ErrorMessage ="This field is required.")]
-        [MaxLength(12, ErrorMessage ="Maximum 12 characters only.")]
-        public string FromAccountNumber { get; set; }
+        public int FromAccountNumber { get; set; }
 
         [ForeignKey("BankAccountForeignKey")]
-        [Column(TypeName = "nvarchar(12)")]
         [DisplayName("Account number")]
         [Required(ErrorMessage = "This field is required.")]
-        [MaxLength(12, ErrorMessage = "Maximum 12 characters only.")]
-        public string ToAccountNumber { get; set; }
+        public int ToAccountNumber { get; set; }
 
-        [Required]
-        public int Amount { get; set; }
+        [DisplayName("Transaction amount")]
+
+        [Required(ErrorMessage = "This field is required.")]
+        public Double Amount { get; set; }
 
         [DisplayFormat(DataFormatString ="{0:dd-MMM-yy}")]
+        [Required(ErrorMessage = "This field is required.")]
         public DateTime Date { get; set; }
     }
 }

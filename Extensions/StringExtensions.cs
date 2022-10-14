@@ -4,30 +4,28 @@ namespace BankTransactions.Extensions
 {
     public static class StringExtensions
     {
+        /**
+         * Credits: https://stackoverflow.com/a/5057800
+         */
         public static string Capitalize(this string str)
         {
-            string delimiter = " ";
-            TextInfo textInfo = new CultureInfo("en-GB", false).TextInfo;
-
-            return string
-                .Join(delimiter, str.Split(delimiter)
-                .Select(word => textInfo.ToTitleCase(word))
-                .ToArray())
-                .Trim();
+            return Thread
+                .CurrentThread
+                .CurrentCulture
+                .TextInfo
+                .ToTitleCase(str);
         }
-    }
 
-    /*
-    public static string Capitalize(this string str)
-    {
-        string capitalizedString = string.Empty;
-
-        foreach (string splitstring in str.Split())
+        public static string Capitalize2(this string str)
         {
-            capitalizedString += $"{char.ToUpper(splitstring[0]) + splitstring[1..]} ";
-        }
+            string capitalizedString = string.Empty;
 
-        return capitalizedString.Trim();
+            foreach (string splitstring in str.Split())
+            {
+                capitalizedString += $"{char.ToUpper(splitstring[0]) + splitstring[1..]} ";
+            }
+
+            return capitalizedString.Trim();
+        }
     }
-    */
 }

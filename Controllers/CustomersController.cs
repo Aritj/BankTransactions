@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Rendering;
+﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using BankTransactions.Models;
 using BankTransactions.Extensions;
@@ -26,6 +21,7 @@ namespace BankTransactions.Controllers
 
         public async Task<IActionResult> Details(int? id)
         {
+            /* Quick and dirty solution ViewBag, should be implemented using ViewModel for Strict Types */
             ViewBag.BankAccounts = _context.BankAccounts.Where(s => s.CustomerId == id).ToList();
 
             return View(await _context.Customers.FirstOrDefaultAsync(m => m.CustomerId == id));
@@ -37,34 +33,26 @@ namespace BankTransactions.Controllers
         }
 
         [HttpPost]
-        [ValidateAntiForgeryToken]
         public async Task<IActionResult> AddOrEdit([Bind("CustomerId,CustomerName,Birthday")] Customer customer)
         {
-            if (! ModelState.IsValid)
-            {
-                return View(customer);
-
-            }
-
             customer.CustomerName = customer.CustomerName.Capitalize();
 
             if (customer.CustomerId == 0)
             {
-                this._context.Add(customer);
+                _context.Add(customer);
             }
             else
             {
-                this._context.Update(customer);
+                _context.Update(customer);
             }
 
-            await this._context.SaveChangesAsync();
+            await _context.SaveChangesAsync();
 
             return RedirectToAction(nameof(Index));
         }
 
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteConfirmed(int id)
+        [HttpPost]
+        public async Task<IActionResult> Delete(int id)
         {
             var customer = await _context.Customers.FindAsync(id);
 

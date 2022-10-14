@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace BankTransactions.Migrations
 {
     [DbContext(typeof(TransactionDbContext))]
-    [Migration("20221010105236_initial create")]
+    [Migration("20221014092045_initial create")]
     partial class initialcreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -52,6 +52,9 @@ namespace BankTransactions.Migrations
                         .HasColumnType("int");
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("BankAccountId"), 1L, 1);
+
+                    b.Property<double>("Amount")
+                        .HasColumnType("float");
 
                     b.Property<int>("BankId")
                         .HasColumnType("int");
@@ -93,21 +96,19 @@ namespace BankTransactions.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("TransactionId"), 1L, 1);
 
-                    b.Property<int>("Amount")
-                        .HasColumnType("int");
+                    b.Property<double>("Amount")
+                        .HasColumnType("float");
 
                     b.Property<DateTime>("Date")
                         .HasColumnType("datetime2");
 
-                    b.Property<string>("FromAccountNumber")
-                        .IsRequired()
+                    b.Property<int>("FromAccountNumber")
                         .HasMaxLength(12)
-                        .HasColumnType("nvarchar(12)");
+                        .HasColumnType("int");
 
-                    b.Property<string>("ToAccountNumber")
-                        .IsRequired()
+                    b.Property<int>("ToAccountNumber")
                         .HasMaxLength(12)
-                        .HasColumnType("nvarchar(12)");
+                        .HasColumnType("int");
 
                     b.HasKey("TransactionId");
 

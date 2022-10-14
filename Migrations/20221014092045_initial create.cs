@@ -16,7 +16,8 @@ namespace BankTransactions.Migrations
                     BankAccountId = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     BankId = table.Column<int>(type: "int", nullable: false),
-                    CustomerId = table.Column<int>(type: "int", nullable: false)
+                    CustomerId = table.Column<int>(type: "int", nullable: false),
+                    Amount = table.Column<double>(type: "float", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -57,9 +58,9 @@ namespace BankTransactions.Migrations
                 {
                     TransactionId = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    FromAccountNumber = table.Column<string>(type: "nvarchar(12)", maxLength: 12, nullable: false),
-                    ToAccountNumber = table.Column<string>(type: "nvarchar(12)", maxLength: 12, nullable: false),
-                    Amount = table.Column<int>(type: "int", nullable: false),
+                    FromAccountNumber = table.Column<int>(type: "int", maxLength: 12, nullable: false),
+                    ToAccountNumber = table.Column<int>(type: "int", maxLength: 12, nullable: false),
+                    Amount = table.Column<double>(type: "float", nullable: false),
                     Date = table.Column<DateTime>(type: "datetime2", nullable: false)
                 },
                 constraints: table =>
