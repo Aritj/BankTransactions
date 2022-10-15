@@ -1,11 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Rendering;
+﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using BankTransactions.Models;
+using BankTransactions.Extensions;
 
 namespace BankTransactions.Controllers
 {
@@ -29,32 +25,26 @@ namespace BankTransactions.Controllers
         }
 
         [HttpPost]
-        [ValidateAntiForgeryToken]
         public async Task<IActionResult> AddOrEdit([Bind("BankId,BankName,TransactionRate")] Bank bank)
         {
-            if (! ModelState.IsValid)
-            {
-                return View(bank);
-
-            }
+            bank.BankName = bank.BankName.Capitalize();
 
             if (bank.BankId == 0)
             {
-                this._context.Add(bank);
+                _context.Add(bank);
             }
             else
             {
-                this._context.Update(bank);
+                _context.Update(bank);
             }
 
-            await this._context.SaveChangesAsync();
+            await _context.SaveChangesAsync();
 
             return RedirectToAction(nameof(Index));
         }
 
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteConfirmed(int id)
+        [HttpPost]
+        public async Task<IActionResult> Delete(int id)
         {
             var bank = await _context.Banks.FindAsync(id);
 

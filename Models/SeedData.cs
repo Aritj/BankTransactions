@@ -8,9 +8,9 @@ namespace BankTransactions.Models
         {
             TransactionDbContext dbContext = app.ApplicationServices.CreateScope().ServiceProvider.GetRequiredService<TransactionDbContext>();
 
-            checkPendingMigrations(dbContext);
+            CheckPendingMigrations(dbContext);
 
-            checkBanks(dbContext);
+            CheckBanks(dbContext);
 
             CheckCustomers(dbContext);
 
@@ -35,7 +35,7 @@ namespace BankTransactions.Models
             }
         }
 
-        private static void checkBanks(TransactionDbContext dbContext)
+        private static void CheckBanks(TransactionDbContext dbContext)
         {
             if (!dbContext.Banks.Any())
             {
@@ -64,7 +64,7 @@ namespace BankTransactions.Models
             }
         }
 
-        private static void checkPendingMigrations(TransactionDbContext dbContext)
+        private static void CheckPendingMigrations(TransactionDbContext dbContext)
         {
             if (dbContext.Database.GetPendingMigrations().Any())
             {

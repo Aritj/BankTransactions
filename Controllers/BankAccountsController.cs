@@ -30,34 +30,37 @@ namespace BankTransactions.Controllers
 
         public IActionResult AddOrEdit(int id = 0)
         {
-            BankAccountAddOrEditViewModel x = new()
+            BankAccount? bankAccount = id == 0 ? new() : _context.BankAccounts.Find(id);
+            bankAccount = bankAccount == null ? new() : bankAccount;
+
+            BankAccountAddOrEditViewModel bankAccountAddOrEditViewModel = new()
             {
-                BankAccount = id == 0 ? new() : _context.BankAccounts.Find(id),
+                BankAccount = bankAccount,
                 BankList = _context.Banks.ToList(),
                 CustomerList = _context.Customers.ToList()
             };
 
-            return View(x);
+            return View(bankAccountAddOrEditViewModel);
         }
 
         [HttpPost]
-        [ValidateAntiForgeryToken]
         public async Task<IActionResult> AddOrEdit(BankAccountAddOrEditViewModel viewModel)
         {
-            BankAccount testAccount = new()
+            BankAccount bankAccount = new()
             {
                 BankAccountId = viewModel.BankAccount.BankAccountId,
                 CustomerId = viewModel.Customer.CustomerId,
-                BankId = viewModel.Bank.BankId
+                BankId = viewModel.Bank.BankId,
+                Amount = viewModel.BankAccount.Amount
             };
 
             if (viewModel.BankAccount.BankAccountId == 0)
             {
-                this._context.Add(testAccount);
+                this._context.Add(bankAccount);
             }
             else
             {
-                this._context.Update(testAccount);
+                this._context.Update(bankAccount);
             }
 
             await this._context.SaveChangesAsync();
@@ -66,9 +69,8 @@ namespace BankTransactions.Controllers
         }
 
 
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteConfirmed(int id)
+        [HttpPost]
+        public async Task<IActionResult> Delete(int id)
         {
             var bankAccount = await _context.BankAccounts.FindAsync(id);
 
