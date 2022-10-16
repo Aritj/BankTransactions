@@ -1,0 +1,55 @@
+﻿@model IEnumerable<BankTransactions.Models.Transaction>
+
+@{
+    ViewData["Title"] = "Transactions";
+}
+
+@section Search {
+    @{
+        await Html.RenderPartialAsync("_SearchPartial");
+    }
+}
+
+    <table class="table" id="search-table">
+        <thead>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.TransactionId)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.FromAccountNumber)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.ToAccountNumber)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Amount)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Date)
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.TransactionId)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.FromAccountNumber)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ToAccountNumber)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Amount)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Date)
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

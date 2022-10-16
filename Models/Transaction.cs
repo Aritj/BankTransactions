@@ -11,21 +11,20 @@ namespace BankTransactions.Models
         public int TransactionId { get; set; }
 
         [ForeignKey("BankAccountForeignKey")]
-        [DisplayName("Account number")]
+        [DisplayName("Account number (sender)")]
         [Required(ErrorMessage ="This field is required.")]
         public int FromAccountNumber { get; set; }
 
         [ForeignKey("BankAccountForeignKey")]
-        [DisplayName("Account number")]
+        [DisplayName("Account number (receiver)")]
         [Required(ErrorMessage = "This field is required.")]
         public int ToAccountNumber { get; set; }
 
         [DisplayName("Transaction amount")]
-
         [Required(ErrorMessage = "This field is required.")]
         public Double Amount { get; set; }
 
-        [DisplayFormat(DataFormatString ="{0:dd-MMM-yy}")]
+        [DisplayFormat(DataFormatString ="{0:dd-MMM-yy HH:mm:ss}")]
         [Required(ErrorMessage = "This field is required.")]
         public DateTime Date { get; set; }
     }
