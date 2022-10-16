@@ -18,15 +18,9 @@ Please choose correct DB string for your operating system in "Program.cs".
 2.  Open terminal and execute the following command:
     ~ docker run -d --name sql_server -e 'ACCEPT_EULA=Y' -e 'SA_PASSWORD=someThingComplicated1234' -p 1433:1433 mcr.microsoft.com/mssql/server:2022-latest
 
-3.  Download Azure Data Studio for graphical DB UI:
+3. Clone repository and open using your IDE of choice:
     
-    * https://learn.microsoft.com/en-us/sql/azure-data-studio/download-azure-data-studio?view=sql-server-ver15
-    
-        * Server: localhost
-        
-        * Username: sa
-        
-        * Password: someThingComplicated1234
+    ~ git clone https://github.com/Aritj/BankTransactions.git
 
 4. Open terminal and cd to root of the project:
     
@@ -37,3 +31,15 @@ Please choose correct DB string for your operating system in "Program.cs".
     ~ dotnet ef migrations add initial
     
     ~ dotnet ef database update
+
+5.  Run the application!
+
+# Optional graphical SQL server administration
+Download Azure Data Studio for graphical DB UI:
+    * https://learn.microsoft.com/en-us/sql/azure-data-studio/download-azure-data-studio?view=sql-server-ver15
+    
+        * Server: localhost
+        
+        * Username: sa
+        
+        * Password: someThingComplicated1234
