@@ -36,6 +36,7 @@ Please choose correct DB string for your operating system in "Program.cs".
 
 # Optional graphical SQL server administration
 Download Azure Data Studio for graphical DB UI:
+
     * https://learn.microsoft.com/en-us/sql/azure-data-studio/download-azure-data-studio?view=sql-server-ver15
     
         * Server: localhost
