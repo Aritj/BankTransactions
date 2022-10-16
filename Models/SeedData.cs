@@ -14,12 +14,40 @@ namespace BankTransactions.Models
 
             CheckCustomers(dbContext);
 
+            CheckBankAccounts(dbContext);
+
             dbContext.SaveChanges();
+        }
+
+        private static void CheckBankAccounts(TransactionDbContext dbContext)
+        {
+            if (! dbContext.BankAccounts.Any())
+            {
+                dbContext.BankAccounts.AddRange(
+                    new BankAccount
+                    {
+                        CustomerId = 1,
+                        BankId = 1,
+                        Amount = 1000
+                    },
+                    new BankAccount
+                    {
+                        CustomerId = 2,
+                        BankId = 2,
+                        Amount = 100
+                    },
+                    new BankAccount
+                    {
+                        CustomerId = 2,
+                        BankId = 3,
+                        Amount = 0
+                    });
+            }
         }
 
         private static void CheckCustomers(TransactionDbContext dbContext)
         {
-            if (!dbContext.Customers.Any())
+            if (! dbContext.Customers.Any())
             {
                 dbContext.Customers.AddRange(
                     new Customer
@@ -37,7 +65,7 @@ namespace BankTransactions.Models
 
         private static void CheckBanks(TransactionDbContext dbContext)
         {
-            if (!dbContext.Banks.Any())
+            if (! dbContext.Banks.Any())
             {
                 dbContext.Banks.AddRange(
                     new Bank

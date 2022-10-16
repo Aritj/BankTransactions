@@ -1,5 +1,6 @@
 ﻿using BankTransactions.Models;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 namespace BankTransactions.Controllers
 {
@@ -12,9 +13,16 @@ namespace BankTransactions.Controllers
             _context = context;
         }
 
+        [HttpGet]
         public IActionResult Index()
         {
-            return View(new Transaction { Date = DateTime.Now });
+            return View(new Transaction());
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> Transactions()
+        {
+            return View(await _context.Transactions.ToListAsync());
         }
 
         [HttpPost]
@@ -35,9 +43,9 @@ namespace BankTransactions.Controllers
                 return RedirectToAction(nameof(Index));
             }
 
-            if (transaction.Amount <= 0)
+            if (transaction.Amount <= 0 || fromAccount.Amount < transaction.Amount)
             {
-                // Error message: invalid Transaction amount
+                // Error message: invalid Transaction amount or insufficient funds
                 return RedirectToAction(nameof(Index));
             }
 
@@ -51,6 +59,7 @@ namespace BankTransactions.Controllers
             }
 
             // Perform transaction
+            transaction.Date = DateTime.Now;
             fromAccount.Amount -= transaction.Amount;
             toAccount.Amount += transaction.Amount * (1 - ((double) fromBank.TransactionRate / 100));
 

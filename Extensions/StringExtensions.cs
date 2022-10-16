@@ -15,17 +15,5 @@ namespace BankTransactions.Extensions
                 .TextInfo
                 .ToTitleCase(str);
         }
-
-        public static string Capitalize2(this string str)
-        {
-            string capitalizedString = string.Empty;
-
-            foreach (string splitstring in str.Split())
-            {
-                capitalizedString += $"{char.ToUpper(splitstring[0]) + splitstring[1..]} ";
-            }
-
-            return capitalizedString.Trim();
-        }
     }
 }
