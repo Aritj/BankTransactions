@@ -4,7 +4,13 @@
     ViewData["Title"] = "Banks";
 }
 
-<table class="table">
+@section Search {
+    @{
+        await Html.RenderPartialAsync("_SearchPartial");
+    }
+}
+
+<table class="table" id="search-table">
     <thead>
         <tr>
             <th>

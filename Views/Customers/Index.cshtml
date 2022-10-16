@@ -3,9 +3,14 @@
 @{
     ViewData["Title"] = "Customers";
 }
-<input type="text" class="form-control" id="customer-search-input" onkeyup="filterByName()" placeholder="Search for names..">
 
-<table class="table" id="customer-table">
+@section Search {
+    @{
+        await Html.RenderPartialAsync("_SearchPartial");
+    }
+}
+
+<table class="table" id="search-table">
     <thead>
         <tr>
             <th>
@@ -47,24 +52,3 @@
 }
     </tbody>
 </table>
-
-<script>
-    function filterByName() {
-        var input = document.getElementById("customer-search-input");
-        var filter = input.value.toUpperCase();
-        var table = document.getElementById("customer-table");
-        var tr = table.getElementsByTagName("tr");
-
-        for (var i = 0; i < tr.length; i++) {
-            var td = tr[i].getElementsByTagName("td")[0];
-            if (td) {
-                var txtValue = td.textContent || td.innerText;
-                if (txtValue.toUpperCase().indexOf(filter) > -1) {
-                    tr[i].style.display = "";
-                } else {
-                    tr[i].style.display = "none";
-                }
-            }
-        }
-    }
-</script>

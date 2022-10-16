@@ -1,0 +1,22 @@
+﻿<input type="text" class="form-control" id="search-input" onkeyup="filterByName()" placeholder="Search..">
+
+<script>
+    function filterByName() {
+        var searchColumn = 0;
+        var filter = document.getElementById("search-input").value.toUpperCase();
+        var table = document.getElementById("search-table");
+        var tr = table.getElementsByTagName("tr");
+
+        for (var i = 0; i < tr.length; i++) {
+            var td = tr[i].getElementsByTagName("td")[searchColumn];
+            if (td) {
+                var txtValue = td.textContent || td.innerText;
+                if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                    tr[i].style.display = "";
+                } else {
+                    tr[i].style.display = "none";
+                }
+            }
+        }
+    }
+</script>

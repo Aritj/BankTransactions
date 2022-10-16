@@ -37,6 +37,7 @@
     <div class="container">
         <main role="main" class="pb-3">
             <div class="col-md8 offset-md2">
+                @await RenderSectionAsync("Search", required: false)
                 @RenderBody()
             </div>
         </main>
