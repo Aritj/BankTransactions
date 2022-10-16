@@ -4,6 +4,8 @@ Project was part of the course 5022.22 "Web Applications: ASP.NET Core with C#".
 
 The objective of the course is to learn how to develop interactive and database-driven web-sites with ASP.NET Core / C#.
 
+Please choose correct DB string for your operating system in "Program.cs"
+
 
 # Mac instructions (works for both intel and apple chips):
 https://www.twilio.com/blog/using-sql-server-on-macos-with-docker?fbclid=IwAR38OG0CV4CX5z8NQ9vV6s4E09_ztohOS8Rz65NlmW2C3-5el190GFakbn0
