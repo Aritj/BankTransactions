@@ -35,6 +35,7 @@ Please choose correct DB string for your operating system in "Program.cs".
 5.  Run the application!
 
 # Optional graphical SQL server administration
+
 Download Azure Data Studio for graphical DB UI:
 
     * https://learn.microsoft.com/en-us/sql/azure-data-studio/download-azure-data-studio?view=sql-server-ver15
@@ -44,3 +45,12 @@ Download Azure Data Studio for graphical DB UI:
         * Username: sa
         
         * Password: someThingComplicated1234
+
+# Nice to know! Mac uses port 5000/tcp for AirPort/upnp:
+
+(base) aritj@Aris-MacBook-Pro ~ % nmap -p 5000 localhost                    
+
+PORT     STATE SERVICE
+5000/tcp open  upnp
+
+Nmap done: 1 IP address (1 host up) scanned in 0.05 seconds
