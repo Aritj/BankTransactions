@@ -48,9 +48,9 @@ Download Azure Data Studio for graphical DB UI:
 
 # Nice to know! Mac uses port 5000/tcp for AirPort/upnp:
 
-(base) aritj@Aris-MacBook-Pro ~ % nmap -p 5000 localhost                    
+    (base) aritj@Aris-MacBook-Pro ~ % nmap -p 5000 localhost 
+    
+    PORT     STATE SERVICE
+    
+    5000/tcp open  upnp
 
-PORT     STATE SERVICE
-5000/tcp open  upnp
-
-Nmap done: 1 IP address (1 host up) scanned in 0.05 seconds
